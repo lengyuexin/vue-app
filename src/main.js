@@ -9,6 +9,7 @@ import VuePreview from 'vue-preview' // 导入vue-preview
 Vue.use(VuePreview) // 挂载vue-preview
 import './lib/mui/css/mui.min.css' //导入全部MUI的样式
 import './lib/mui/css/icons-extra.css' // 导入扩展图标样式
+
 import MintUI from 'mint-ui' // 导入全部 Mint-UI 中的组件 
 import 'mint-ui/lib/style.css' // 导入mint-ui样式
 Vue.use(MintUI); // 挂载Mint-UI 中的组件

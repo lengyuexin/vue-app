@@ -134,8 +134,8 @@ export default {
 
             .supports {
                 .icon {
-                    width: 12px;
-                    height: 12px;
+                    width: 16px;
+                    height: 16px;
                     display: inline-block;
                     margin-right: 4px;
                     background-size: 12px 12px;
@@ -276,10 +276,6 @@ export default {
 
         .supportsList {
 
-            display: flex;
-            justify-content: space-between;
-            padding-right: 30px;
-
             img {
                 width: 12px;
                 height: 12px;
@@ -288,6 +284,7 @@ export default {
             }
 
             .icon-description {
+                vertical-align: top;
                 display: inline-block;
                 font-size: 12px;
                 line-height: 12px;

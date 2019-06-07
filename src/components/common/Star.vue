@@ -48,24 +48,24 @@ export default {
         margin-right: 5px;
 
         &.on {
-            height: 10px;
-            width: 10px;
+            height: 15px;
+            width: 15px;
             background-image: url(../header/header_img/star_on.png);
             background-repeat: no-repeat;
             background-size: 10px 10px;
         }
 
         &.half {
-            height: 10px;
-            width: 10px;
+            height: 15px;
+            width: 15px;
             background-image: url(../header/header_img/star_half.png);
             background-repeat: no-repeat;
             background-size: 10px 10px;
         }
 
         &.off {
-            height: 10px;
-            width: 10px;
+            height: 15px;
+            width: 15px;
             background-image: url(../header/header_img/star_off.png);
             background-repeat: no-repeat;
             background-size: 10px 10px;
