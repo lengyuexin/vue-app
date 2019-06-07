@@ -1,4 +1,4 @@
-## vue-cms
+## vue-app
 
 ## 安装与使用
 * npm install 安装依赖
