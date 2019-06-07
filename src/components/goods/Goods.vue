@@ -30,38 +30,26 @@
                                     <span>&yen;{{food.price}}</span>
                                     <span v-show="food.oldPrice">&yen;{{food.oldPrice}}</span>
                                 </div>
-                                 <div class="shopcart_btn">
-                                    
-                                   <svg  aria-hidden="true" @click="decrease">
-                                      <use xlink:href="#icon-jianshaoanniu_dianji" ></use>
-                                    </svg> 
-                                    
-                                  
-                                    <svg  aria-hidden="true" @click="add">
-                                        <use xlink:href="#icon-zengjiaanniu_dianji"></use>
-                                    </svg>
-
-
-                                 </div>
+                                <cartbtn :food="food"></cartbtn>
                             </div>
                         </li>
                     </ul>
-                   
                 </li>
             </ul>
         </div>
-        <shopcart :selectFoods="[{'count':0,'price':10000000}]":deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shopcart>
+        <shopcart :selectFoods="selectFoods" :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shopcart>
     </div>
 </template>
 <script>
 const url = "https://lengyuexin.github.io/json/app.json";
 import betterScroll from 'better-scroll'
 import shopcart from './shopCart/ShopCart.vue'
-import '../../lib/iconfont/iconfont.js'
+import cartbtn from '../common/CartBtn.vue'
+
 export default {
 
 
-props:['seller'],
+    props: ['seller'],
     data() {
         return {
             goods: [],
@@ -72,34 +60,41 @@ props:['seller'],
     },
     created() {
         this.getGoods();
+
+
     },
+
     computed: {
         currentIndex() {
             for (let i = 0; i < this.listHeight.length; i++) {
                 let curHeight = this.listHeight[i];
                 let nextHeight = this.listHeight[i + 1];
-                if (!nextHeight || (this.scrollY >=curHeight && this.scrollY < nextHeight)) {
+                if (!nextHeight || (this.scrollY >= curHeight && this.scrollY < nextHeight)) {
                     return i;
                 }
             }
             return 0;
 
+        },
+        selectFoods() {
+            let foods = [];
+            this.goods.forEach(item => {
+                item.foods.forEach(food => {
+                    if (food.count > 0) {
+                        foods.push(food);
+                    }
+                })
+            })
+            return foods;
         }
 
     },
     methods: {
-        decrease(){
-            alert('---')
-        }, 
 
-        add(){
-            alert('+++')
-        },
         //获取商品信息
         getGoods() {
             this.$http.get(url).then(result => {
                 this.goods = result.body.goods;
-
                 this.$nextTick(() => {
                     this.initScroll();
                     this.calculateHeight();
@@ -109,16 +104,17 @@ props:['seller'],
         //初始化滚动条
         initScroll() {
             this.menuScroll = new betterScroll(this.$refs.menuScroll, {
-              click:true
+                click: true
             })
             this.foodsScroll = new betterScroll(this.$refs.foodsScroll, {
-                probeType: 3,  click:true
+                probeType: 3,
+                click: true
             })
             this.foodsScroll.on('scroll', (pos) => {
                 this.scrollY = Math.abs(Math.round(pos.y))
             })
         },
-      //获取计算高度
+        //获取计算高度
         calculateHeight() {
             let foodList = document.querySelectorAll('.food-list');
             let height = 0;
@@ -130,19 +126,20 @@ props:['seller'],
             }
         },
 
-        selectMenu(index,event){
-            if(!event._constructed){
-              return;
+        selectMenu(index, event) {
+            if (!event._constructed) {
+                return;
             }
-            let foodsList=document.querySelectorAll(".food-list")
-            let el=foodsList[index];
-            this.foodsScroll.scrollToElement(el,300);
+            let foodsList = document.querySelectorAll(".food-list")
+            let el = foodsList[index];
+            this.foodsScroll.scrollToElement(el, 300);
 
         }
 
     },
-    components:{
-        shopcart
+    components: {
+        shopcart,
+        cartbtn
     }
 }
 </script>
@@ -158,7 +155,7 @@ props:['seller'],
     .menu {
         flex: 0 0 80px;
         width: 80px;
-     
+
 
 
 
@@ -185,7 +182,7 @@ props:['seller'],
 
                     .text {
                         font-weight: bold;
-                        color:red;
+                        color: red;
                     }
                 }
 
@@ -263,7 +260,7 @@ props:['seller'],
                 margin-bottom: 18px;
                 display: flex;
                 justify-content: space-between;
-         
+
                 .icon {
                     padding: 18px 10px 18px 18px;
 
@@ -313,19 +310,9 @@ props:['seller'],
                     }
                 }
 
-                  .shopcart_btn{
-                     display: flex;
-                     justify-content: space-around;
-                      height:15px;
-                      padding:0 20px;
-                   
-                    
-                }
-
-
             }
 
-          
+
         }
 
     }

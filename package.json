@@ -1,7 +1,7 @@
 {
   "name": "vue-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "vue高仿饿了么app",
   "main": "webpack.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -35,7 +35,6 @@
     "webpack-dev-server": "^3.4.1"
   },
   "dependencies": {
-    "bootstrap": "^3.3.7",
     "mint-ui": "^2.2.13",
     "vue": "^2.6.10",
     "vue-preview": "^1.1.3",

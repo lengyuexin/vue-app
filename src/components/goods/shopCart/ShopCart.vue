@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="cart-left">
-            <div class="iconBox">
+            <div class="iconBox" id="iconBox">
                 <div class="icon" :class="totalCount>0?'active':''">
                     <i class="mui-icon mui-icon-extra mui-icon-extra-cart"></i>
                 </div>
@@ -14,11 +14,14 @@
                 另需配送费￥{{deliveryPrice}}元
             </span>
         </div>
-        <div class="cart-right" :class="totalCount>0?'active':''">
+        <div class="cart-right" :class="{'active':totalCount>0}">
             <span class="send" v-show="totalCount==0">
-                ￥{{minPrice}}起送{{totalCount}}
+                ￥{{minPrice}}元起送
             </span>
-             <span class="send" v-show="totalCount!=0">
+             <span class="send" v-show="(totalPrice<minPrice)&&(totalCount>0)" style="background: #333;color:white;">
+               还差 ￥{{minPrice-totalPrice}}元起送
+            </span>
+            <span class="send" v-show="totalPrice>=minPrice">
                去结算
             </span>
         </div>
